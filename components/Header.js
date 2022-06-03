@@ -13,7 +13,7 @@ import {
   export default function Header() {
     return (
       <SafeAreaView style={styles.container}>
-       <Text style={styles.header}>MIN RECEPTBOK</Text>
+       <Text style={styles.header}>MY HEALTHY MEAL</Text>
       </SafeAreaView>);
   
   }

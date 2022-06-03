@@ -1,8 +1,45 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity, ImageBackground, } from 'react-native';
 import Header from '../components/Header';
 
-export default function MainView() {
+/*const Stack=createNativeStackNavigator();
+
+const MyStack=()=>{
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Main"
+                    component={MainView}
+                />
+
+                <Stack.Screen
+                    name="Breakfast"
+                    component={BreakfastView}
+                />
+
+                <Stack.Screen
+                    name="Lunch"
+                    component={LunchView}
+                />
+
+                <Stack.Screen
+                    name="Dinner"
+                    component={DinnerView}
+                />
+
+                <Stack.Screen
+                    name="Snack"
+                    component={SnackView}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};*/
+
+export default function MainView({navigation}) {
   return (
     <SafeAreaView >
         
@@ -14,28 +51,32 @@ export default function MainView() {
                    
             >
                 <View style={styles.buttonsBackground}>
-                 <TouchableOpacity>
+                 <TouchableOpacity
+                    onPress={()=>navigation.navigate('Breakfast')}>
                 <View style={styles.buttonView}>
                     
                     <Text style={styles.textStyle}>FRUKOST</Text>  
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Lunch')} >
                 <View style={styles.buttonView}>
                     
                     <Text style={styles.textStyle}>LUNCH</Text>  
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Dinner')}>
                 <View style={styles.buttonView}>
                     
                     <Text style={styles.textStyle}>MIDDAG</Text>  
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+                    onPress={()=>navigation.navigate('Snack')}>
                 <View style={styles.buttonView}>
                     
                     <Text style={styles.textStyle}>MELLANMÅL</Text>  
