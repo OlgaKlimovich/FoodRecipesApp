@@ -7,86 +7,134 @@ import { SafeAreaView,
     Alert,
     Modal,
     Button,
-    TextInput, } 
+    TextInput,
+    ImageBackground,
+    Dimensions,
+    Image } 
     from "react-native";
 
 import{Ionicons} from '@expo/vector-icons';
 import React, { useState } from "react";
-//import {Formik} from "formik";
+import {Field, Formik} from 'formik';
 
 
-export default function NewRecipeForm({addBreakfast}) {
+export default function NewRecipeForm({addRecipe}) {
 
-    /*return(
-     
-        <View >
+    return(
+        
+        <ScrollView>
+        <ImageBackground 
+        style={styles.mainImg} 
+        source={require('../assets/matingredienser.jpg')}>
+        
+            
          <Formik  
-                initialValues={{titel:'', ingredients:'', cooking}}
+                initialValues={{titel:'', image:'', ingredients:'', cooking:''}}
                 onSubmit={(values, action)=>{
-                    addBreakfast(values);
+                    addRecipe(values);
                     action.resetForm();
+                    console.log(values);
+                    
                 }}>
+
+
+
+
                     {(props)=>(
-                        <View>
+                        <View style={styles.formView}>
                             <TextInput multiline
                                 style={styles.titel}
                                 value={props.values.titel}
-                                placeholder='Titel'
+                                placeholder='Rättens titel'
                                 onChangeText={props.handleChange('titel')}/>
+
+                            <TextInput
+                                
+                                style={styles.image}
+                                value={props.values.image}
+                                placeholder='Bild'
+                                onChangeText={props.handleChange('image')}/>
 
                             <TextInput multiline
                                 style={styles.ingredients}
                                 value={props.values.ingredients}
-                                placeholder='ingredients'
+                                placeholder='Ingredients'
                                 onChangeText={props.handleChange('ingredients')}/>
 
                             <TextInput multiline
                                 style={styles.cooking}
                                 value={props.values.cooking}
-                                placeholder='cooking'
+                                placeholder='Cooking'
                                 onChangeText={props.handleChange('cooking')}/>
 
-                            <Button 
+                            <Button
+                            style={styles.addButton}
                             title="Lägg till recept" 
                             onPress={props.handleSubmit}/>
-
-                        </View>
+</View>
+                        
                     )}
 
-</Formik>     
-        </View>
-    );*/
+
+</Formik>   
+  
+        
+        
+       </ImageBackground>
+       </ScrollView>
+    
+    );
 }
 
 const styles = StyleSheet.create({
+
+    formView:{
+        height: Dimensions.get('window'). height, 
+    },
     
     titel:{
-        height:70,
-        borderWidth:1,
-        borderRadius:15,
+        height:50,
+        borderRadius:10,
         margin:10,
-        padding:10,
-        borderColor:"#4682B4",
-        textAlignVertical:"top",
-        backgroundColor:"#fff",
+        paddingHorizontal: 10,
+        textAlignVertical:"center",
+        backgroundColor:"#f2f3f499",
+        fontSize: 20,
+    },
+
+    image: {
+        height:50,
+        borderRadius:10,
+        margin:10,
+        paddingHorizontal: 10,
+        textAlignVertical:"center",
+        backgroundColor:"#f2f3f499",
+        fontSize: 20,
     },
 
     ingredients:{
-        height:400,
-        borderWidth:1,
-        borderRadius:15,
-        marginLeft:10,
-        marginRight:10,
-        marginBottom:30,
-        marginTop:20,
-        padding:10,
-        borderColor:"#4682B4",
+        height:200,
+        borderRadius:10,
+        margin:10,
+        paddingHorizontal: 10,
         textAlignVertical:"top",
-        backgroundColor:"#fff",
+        backgroundColor:"#f2f3f499",
+        fontSize: 20,
     },
 
     cooking: {
+        height:200,
+        borderRadius:10,
+        margin:10,
+        paddingHorizontal: 10,
+        textAlignVertical:"top",
+        backgroundColor:"#f2f3f499",
+        fontSize: 20,
+    },
 
+    addButton: {
+        fontSize: 20,
+        
     },
    
 })

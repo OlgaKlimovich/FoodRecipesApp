@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import React from "react";
+import { StyleSheet,
+         Text, 
+         View, 
+         SafeAreaView, 
+         Image, 
+         TouchableOpacity, 
+         ImageBackground } from 'react-native';
 
 export default function LunchView() {
     return (

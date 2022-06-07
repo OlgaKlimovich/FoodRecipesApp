@@ -8,32 +8,41 @@ import { StyleSheet,
          Dimensions,
          ScrollView,
          FlatList,
-         Modal, } from 'react-native';
+         Modal,
+         Alert,} from 'react-native';
 import React, { useState } from "react";
 import{Ionicons} from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BreakfastList from '../RecipeLists/BreakfastList';
 import NewRecipeForm from '../components/NewRecipeForm';
 
 
-export default function BreakfastView() {
+export default function BreakfastView({navigation}) {
 
-    const [breakfast, setBreakfast]=useState([{BreakfastList}]);
+    const [breakfast, setBreakfast]=useState(BreakfastList);
 
     const [modalWindow, setModalWindow]=useState(false);
 
-    const addBreakfast=(breakfast)=>{
+    //const [recipeWindow, setRecipeWindow]=useState(false);
+
+    const addRecipe=(recipe)=>{
         setBreakfast((list)=>{
-            breakfast.key=Math.random().toString();
+            recipe.key=Math.random().toString();
             return[
-                breakfast,
+                recipe,
                 ...list
             ]
         });
         setModalWindow(false);
-    };
+    }
+
+   
 
     return (
       <SafeAreaView >
+         
+          
           <ImageBackground 
                 style={styles.mainImg} 
                 source={require('../assets/breakfast.jpg')}>
@@ -41,30 +50,63 @@ export default function BreakfastView() {
 
                     <ScrollView style={styles.scrollView}>
 
-        <FlatList data={BreakfastList} renderItem={({item})=>(
+                   
+
+        <FlatList data={breakfast} renderItem={({item})=>(
             
-                <TouchableOpacity style={styles.buttonView}>
+                <TouchableOpacity style={styles.buttonView}
+                onPress={()=>navigation.navigate('Recipe',item)}>
 
                     <Image style={styles.buttonImg} source={item.image}/>
 
                     <Text style={styles.recipesTitle}>{item.titel}</Text>
+
+                    <Ionicons name='trash' 
+                 style={styles.iconDelete}
+                 onPress={()=>deleteRecipe()}
+                 />
+                    
                     
                 </TouchableOpacity>
-        )}>
-        </FlatList>
+                
+                
 
-          <Ionicons name="add-circle" 
+
+
+
+        )}
+        >
+             
+        </FlatList>
+        <Ionicons name="add-circle" 
                   style={styles.icon} 
                   onPress={()=>setModalWindow(true)}/>
+            <Modal visible={modalWindow}>
+                <Ionicons name='close' 
+            style={styles.iconClose}
+            onPress={()=>setModalWindow(false)}/>
+             <NewRecipeForm addRecipe={addRecipe}/>
+                      
+                      </Modal>
+        
+      
+      
 
-        <Modal visible={modalWindow} >
-            <View style={styles.modal}>
-                <Ionicons name="close-circle" 
-                          style={styles.icon}
-                          onPress={()=>setModalWindow(false)}/>
-                <NewRecipeForm addBreakfast={addBreakfast}/>
-            </View>
-        </Modal>
+        
+       
+             
+
+        
+
+         
+
+
+
+             
+
+
+
+
 
 
         </ScrollView>
@@ -84,7 +126,7 @@ export default function BreakfastView() {
         fontSize:40,
         color: "#7e5e60",
         marginTop: 30,
-        textAlign: "center"
+        textAlign: "center",
     },
 
     scrollView: {
@@ -121,6 +163,18 @@ export default function BreakfastView() {
         color: "#f2f3f499",
         fontSize: 50,
         textAlign:"center",
+    },
+
+    iconClose: {
+        color: "#696969",
+        fontSize: 40,
+        textAlign:"center",
+    },
+
+    iconDelete:{
+        color: "#4f3a3c",
+        fontSize: 25,
+        
     },
 
     modal: {
