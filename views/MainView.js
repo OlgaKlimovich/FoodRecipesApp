@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
     buttonView: {
         backgroundColor: "#00000099",
         marginHorizontal:10,
-        marginVertical: 20,
+        marginVertical: 10,
         padding:10,
         borderRadius: 20,
-        height: 80,
+        height: 130,
         justifyContent:"center",
         alignItems: "center",
     },

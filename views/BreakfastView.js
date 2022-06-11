@@ -17,7 +17,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BreakfastList from '../RecipeLists/BreakfastList';
 import NewRecipeForm from '../components/NewRecipeForm';
 
-
 export default function BreakfastView({navigation}) {
 
     const [breakfast, setBreakfast]=useState(BreakfastList);
@@ -37,89 +36,49 @@ export default function BreakfastView({navigation}) {
         setModalWindow(false);
     }
 
-   
+    const deleteRecipe=()=>{
+        
+    }
 
     return (
       <SafeAreaView >
-         
-          
           <ImageBackground 
                 style={styles.mainImg} 
                 source={require('../assets/breakfast.jpg')}>
                     <Text style={styles.headerText}>FRUKOST</Text>
 
-                    <ScrollView style={styles.scrollView}>
+             <FlatList LisHeaderComponent={ <></>}
+                       data={breakfast} renderItem={({item})=>(
+                         <TouchableOpacity style={styles.buttonView}
+                            onPress={()=>navigation.navigate('Recipe',item)}>
+                                <Image style={styles.buttonImg} source={item.image}/>
+                                <Text style={styles.recipesTitle}>{item.titel}</Text>
+                                <Ionicons name='trash' 
+                                          style={styles.iconDelete}
+                                          onPress={()=>deleteRecipe()}/>
+                         </TouchableOpacity>
+                         )}>
+                  ListFooterComponent={ <></>}  
+             </FlatList>
 
-                   
+             <Ionicons name="add-circle" 
+                       style={styles.icon} 
+                       onPress={()=>setModalWindow(true)}/>
 
-        <FlatList data={breakfast} renderItem={({item})=>(
-            
-                <TouchableOpacity style={styles.buttonView}
-                onPress={()=>navigation.navigate('Recipe',item)}>
-
-                    <Image style={styles.buttonImg} source={item.image}/>
-
-                    <Text style={styles.recipesTitle}>{item.titel}</Text>
-
-                    <Ionicons name='trash' 
-                 style={styles.iconDelete}
-                 onPress={()=>deleteRecipe()}
-                 />
-                    
-                    
-                </TouchableOpacity>
-                
-                
-
-
-
-
-        )}
-        >
-             
-        </FlatList>
-        <Ionicons name="add-circle" 
-                  style={styles.icon} 
-                  onPress={()=>setModalWindow(true)}/>
-            <Modal visible={modalWindow}>
+             <Modal visible={modalWindow}>
                 <Ionicons name='close' 
-            style={styles.iconClose}
-            onPress={()=>setModalWindow(false)}/>
-             <NewRecipeForm addRecipe={addRecipe}/>
-                      
-                      </Modal>
-        
-      
-      
-
-        
-       
-             
-
-        
-
-         
-
-
-
-             
-
-
-
-
-
-
-        </ScrollView>
-          </ImageBackground>
+                          style={styles.iconClose}
+                          onPress={()=>setModalWindow(false)}/>
+                 <NewRecipeForm addRecipe={addRecipe}/>
+             </Modal>
+         </ImageBackground>
       </SafeAreaView>
     )};
 
  const styles = StyleSheet.create({
     mainImg: {
         width: "100%",
-        height: "100%", 
-        //width: Dimensions.get('window'). width,   
-        //height: Dimensions.get('window'). height,            
+        height: "100%",             
     },
 
     headerText: {
@@ -136,7 +95,7 @@ export default function BreakfastView({navigation}) {
     buttonView: {
         backgroundColor: "#f2f3f499",
         marginHorizontal:10,
-        marginVertical: 10,
+        marginVertical: 5,
         padding:8,
         borderRadius: 20,
         height: 80,
@@ -146,7 +105,6 @@ export default function BreakfastView({navigation}) {
     },
 
     buttonImg:{
-        //margin:1,
         width: 67,
         height: 67,
         resizeMode: "cover",
@@ -157,6 +115,7 @@ export default function BreakfastView({navigation}) {
         fontSize: 25,
         fontWeight: "bold",
         color:"#4f3a3c",
+        width:220,
     },
 
     icon: {
@@ -173,8 +132,7 @@ export default function BreakfastView({navigation}) {
 
     iconDelete:{
         color: "#4f3a3c",
-        fontSize: 25,
-        
+        fontSize: 25,   
     },
 
     modal: {

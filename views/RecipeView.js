@@ -26,10 +26,11 @@ export default function RecipeView({route}) {
     )};
 
  const styles = StyleSheet.create({
-    recipesTitle: {
-      height: 80,
+  
+   recipesTitle: {
       paddingTop: 30,
-      marginHorizontal:10,
+      paddingBottom:15,
+      paddingHorizontal:10,
       fontSize:30,
       fontWeight:"bold",
       color:"#737373",
@@ -37,30 +38,25 @@ export default function RecipeView({route}) {
     },
 
     recipesImg: {
-      height: 250,
-      width: "90%",
-      margin:10,
-      //padding:10,
-      borderRadius: 20,
+      height: 300,
+      width:"100%",
       resizeMode: "cover",
     },
 
     recipesIngrediens:{
-      height: 130,
-      paddingVertical: 10,
+      paddingVertical: 20,
       fontSize:17,
       fontStyle:"italic",
       color:"#737373",
       textAlign: "center", 
-      marginHorizontal:20,  
+      paddingHorizontal:20,  
     },
 
     cooking: {
-      height: 230,
-      paddingVertical: 10,
+      paddingVertical: 20,
       fontSize:17,
       color:"#737373",
       textAlign: "center",  
-      marginHorizontal:20,
+      paddingHorizontal:20,
     },
 })

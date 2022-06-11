@@ -21,35 +21,28 @@ import {Field, Formik} from 'formik';
 export default function NewRecipeForm({addRecipe}) {
 
     return(
-        
         <ScrollView>
         <ImageBackground 
         style={styles.mainImg} 
         source={require('../assets/matingredienser.jpg')}>
-        
-            
+          
          <Formik  
                 initialValues={{titel:'', image:'', ingredients:'', cooking:''}}
                 onSubmit={(values, action)=>{
                     addRecipe(values);
                     action.resetForm();
                     console.log(values);
-                    
-                }}>
-
-
-
+                    }}>
 
                     {(props)=>(
                         <View style={styles.formView}>
                             <TextInput multiline
                                 style={styles.titel}
                                 value={props.values.titel}
-                                placeholder='Rättens titel'
+                                placeholder='Rättens namn'
                                 onChangeText={props.handleChange('titel')}/>
 
                             <TextInput
-                                
                                 style={styles.image}
                                 value={props.values.image}
                                 placeholder='Bild'
@@ -71,18 +64,11 @@ export default function NewRecipeForm({addRecipe}) {
                             style={styles.addButton}
                             title="Lägg till recept" 
                             onPress={props.handleSubmit}/>
-</View>
-                        
-                    )}
-
-
-</Formik>   
-  
-        
-        
+                        </View>
+                     )}
+         </Formik>   
        </ImageBackground>
        </ScrollView>
-    
     );
 }
 
@@ -93,47 +79,42 @@ const styles = StyleSheet.create({
     },
     
     titel:{
-        height:50,
-        borderRadius:10,
-        margin:10,
+        height:80,
+        marginVertical:10,
         paddingHorizontal: 10,
-        textAlignVertical:"center",
+        textAlignVertical:"top",
         backgroundColor:"#f2f3f499",
-        fontSize: 20,
+        fontSize: 15,
     },
 
     image: {
         height:50,
-        borderRadius:10,
-        margin:10,
+        marginVertical:10,
         paddingHorizontal: 10,
-        textAlignVertical:"center",
+        textAlignVertical:"top",
         backgroundColor:"#f2f3f499",
-        fontSize: 20,
+        fontSize: 15,
     },
 
     ingredients:{
         height:200,
-        borderRadius:10,
-        margin:10,
+        marginVertical:10,
         paddingHorizontal: 10,
         textAlignVertical:"top",
         backgroundColor:"#f2f3f499",
-        fontSize: 20,
+        fontSize: 15,
     },
 
     cooking: {
         height:200,
-        borderRadius:10,
-        margin:10,
+        marginVertical:10,
         paddingHorizontal: 10,
         textAlignVertical:"top",
         backgroundColor:"#f2f3f499",
-        fontSize: 20,
+        fontSize: 15,
     },
 
     addButton: {
-        fontSize: 20,
         
     },
    
