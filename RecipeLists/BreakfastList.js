@@ -2,7 +2,7 @@ export default [
     {
         image: require("../assets/bananpannkaka.webp"),
         titel: "Bananpannkaka",
-        ingredients:"1 banan \n 2 ägg 1 krm ekologiskt vaniljpulver 1 tsk smör",
+        ingredients:"1 banan  2 ägg 1 krm ekologiskt vaniljpulver 1 tsk smör",
         cooking: "Mosa bananen med gaffel i en bunke. Knäck ner äggen, strö ner vaniljpulvret och vispa ihop till en kladdig massa. Klicka ut smeten som små plättar eller lite större pannkakor i en stekpanna. Använd smöret till stekningen. Grädda bananpannkakorna på båda sidorna på låg värme .Servera ev. med en klick turkisk yoghurt och lite skivad frukt eller färska/tinade bär.",
         key:"1"
     },

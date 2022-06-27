@@ -9,23 +9,30 @@ import { StyleSheet,
          ScrollView,
          FlatList,
          Modal,
-         Alert,} from 'react-native';
-import React, { useState } from "react";
+         Alert,
+         StatusBar,
+         NativeEventEmitter} from 'react-native';
+import React, { useState, useEffect } from "react";
 import{Ionicons} from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BreakfastList from '../RecipeLists/BreakfastList';
 import NewRecipeForm from '../components/NewRecipeForm';
+import Recipe from '../models/Recipe';
+//import { insert } from 'formik';
+import {findAll, insert, deleteById} from '../datebase/Dbutils';
+import { TextInput } from 'react-native';
+import MainView from './MainView';
 
 export default function BreakfastView({navigation}) {
 
-    const [breakfast, setBreakfast]=useState(BreakfastList);
+    const [recipe, setBreakfast]=useState(BreakfastList, []);
 
     const [modalWindow, setModalWindow]=useState(false);
+    
+    const emitter=new NativeEventEmitter()
 
-    //const [recipeWindow, setRecipeWindow]=useState(false);
-
-    const addRecipe=(recipe)=>{
+    /*const addRecipe=(recipe)=>{
         setBreakfast((list)=>{
             recipe.key=Math.random().toString();
             return[
@@ -34,11 +41,65 @@ export default function BreakfastView({navigation}) {
             ]
         });
         setModalWindow(false);
-    }
+    }*/
 
-    const deleteRecipe=()=>{
+    const addRecipe=(recipe)=>{
+        //const recipe=new Recipe()
+        insert (recipe)
+        .then(res=>{
+            console.log("insert res", res)
+            return findAll()
+        })
+        .then (res=>setBreakfast(res))
+        .catch(err=>console.log(err))
+        setBreakfast((list)=>{
+            recipe.key=Math.random().toString();
+            return[
+                recipe,
+                ...list
+            ]
+        });
+        setModalWindow(false);
+
+   }
+
+    const deleteRecipe=(id)=>{
+        
+            deleteById(id)
+                //.then(res => emitter.emit('delete', recipe))
+                .then (res=>setBreakfast(res))
+                .catch(err=>console.log(err))
+                setBreakfast((list)=>{
+                    
+                    return[
+                       
+                        ...list
+                    ]
+        });
+       
         
     }
+
+    const deleteListener=emitter.addListener('delete',(titel)=>{
+        findAll()
+            .then(res => setBreakfast(res))
+            .catch(err => console.log(err))
+
+    })
+    useEffect(() => {
+        findAll()
+            .then(res => setBreakfast(res))
+        return () => deleteListener.remove()
+    }, [])
+
+    
+
+       
+        
+
+    
+
+
 
     return (
       <SafeAreaView >
@@ -48,14 +109,14 @@ export default function BreakfastView({navigation}) {
                     <Text style={styles.headerText}>FRUKOST</Text>
 
              <FlatList LisHeaderComponent={ <></>}
-                       data={breakfast} renderItem={({item})=>(
+                       data={recipe} renderItem={({item})=>(
                          <TouchableOpacity style={styles.buttonView}
                             onPress={()=>navigation.navigate('Recipe',item)}>
                                 <Image style={styles.buttonImg} source={item.image}/>
                                 <Text style={styles.recipesTitle}>{item.titel}</Text>
                                 <Ionicons name='trash' 
                                           style={styles.iconDelete}
-                                          onPress={()=>deleteRecipe()}/>
+                                          onPress={deleteRecipe}/>
                          </TouchableOpacity>
                          )}>
                   ListFooterComponent={ <></>}  

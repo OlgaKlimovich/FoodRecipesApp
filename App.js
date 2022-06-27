@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, 
          Text, 
@@ -12,10 +12,21 @@ import RecipeView from './views/RecipeView';
 import Header from './components/Header';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getTableInfo, initDB } from './datebase/Dbutils';
 
 const Stack=createNativeStackNavigator();
 
 export default function App() {
+
+  useEffect(()=>{
+    initDB()
+    .then(res=>{
+      console.log("result from init", res)
+      return getTableInfo()
+    })
+    .then(res=>console.log("pragma table_info", res))
+    .catch(err=>console.log(err))
+  }, [])
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='BreakfastView'>
