@@ -3,12 +3,7 @@ import { StyleSheet,
          Text, 
          View, 
          SafeAreaView, 
-         Image, 
-         TouchableOpacity, 
-         ImageBackground,
-         FlatList,
          ScrollView } from "react-native";
-import BreakfastList from '../RecipeLists/BreakfastList';
 
 export default function RecipeView({route}) {
     return (
@@ -16,7 +11,6 @@ export default function RecipeView({route}) {
           <ScrollView>
                <View>
                     <Text style={styles.recipesTitle}>{route.params.titel}</Text>
-                    <Image style={styles.recipesImg} source={route.params.image}/>
                     <Text style={styles.recipesIngrediens}>{route.params.ingredients}</Text>
                     <Text style={styles.cooking}>{route.params.cooking}</Text>
                </View>
@@ -35,12 +29,6 @@ export default function RecipeView({route}) {
       fontWeight:"bold",
       color:"#737373",
       textAlign: "center",            
-    },
-
-    recipesImg: {
-      height: 300,
-      width:"100%",
-      resizeMode: "cover",
     },
 
     recipesIngrediens:{

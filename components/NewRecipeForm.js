@@ -1,21 +1,13 @@
-import { SafeAreaView,
-    Text, 
+import {  
     StyleSheet,
     ScrollView, 
-    View, 
-    TouchableOpacity,
-    Alert,
-    Modal,
+    View,
     Button,
     TextInput,
     ImageBackground,
-    Dimensions,
-    Image } 
-    from "react-native";
-
-import{Ionicons} from '@expo/vector-icons';
-import React, { useState } from "react";
-import {Field, Formik} from 'formik';
+    Dimensions} from "react-native";
+import React from "react";
+import {Formik} from 'formik';
 
 
 export default function NewRecipeForm({addRecipe}) {
@@ -41,12 +33,6 @@ export default function NewRecipeForm({addRecipe}) {
                                 value={props.values.titel}
                                 placeholder='Rättens namn'
                                 onChangeText={props.handleChange('titel')}/>
-
-                            <TextInput
-                                style={styles.image}
-                                value={props.values.image}
-                                placeholder='Bild'
-                                onChangeText={props.handleChange('image')}/>
 
                             <TextInput multiline
                                 style={styles.ingredients}

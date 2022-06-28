@@ -1,12 +1,7 @@
 import {
     StyleSheet,
     Text,
-    Button,
-    View,
-    SafeAreaView,
-    Alert,
-    Image,
-    TouchableHighlight, } from "react-native";
+    SafeAreaView} from "react-native";
   
   export default function Header() {
     return (

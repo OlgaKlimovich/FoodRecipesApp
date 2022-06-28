@@ -1,7 +1,6 @@
 import { StyleSheet, 
          Text, 
          SafeAreaView, 
-         Image, 
          TouchableOpacity, 
          ImageBackground, 
          FlatList,
@@ -10,7 +9,6 @@ import { StyleSheet,
 import React, { useState, useEffect } from "react";
 import{Ionicons} from '@expo/vector-icons';
 import NewRecipeForm from '../components/NewRecipeForm';
-import Recipe from '../models/Recipe';
 import {findAll, insert, deleteById} from '../datebase/Dbutils';
 
 export default function BreakfastView({navigation}) {
@@ -73,7 +71,6 @@ export default function BreakfastView({navigation}) {
                         return(
                          <TouchableOpacity style={styles.buttonView}
                             onPress={()=>navigation.navigate('Recipe',item)}>
-                                <Image style={styles.buttonImg} source={item.image}/>
                                 <Text style={styles.recipesTitle}>{item.titel}</Text>
                                 <Ionicons name='trash' 
                                           style={styles.iconDelete}

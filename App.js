@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, 
-         Text, 
-         View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import MainView from './views/MainView';
 import BreakfastView from './views/BreakfastView';
 import DinnerView from './views/DinnerView';
 import LunchView from './views/LunchView';
 import SnackView from './views/SnackView';
 import RecipeView from './views/RecipeView';
-import Header from './components/Header';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getTableInfo, initDB } from './datebase/Dbutils';
